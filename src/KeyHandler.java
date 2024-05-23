@@ -3,6 +3,11 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    private Game game;
+
+    public KeyHandler(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {}
@@ -21,6 +26,13 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
+            if (game.isPaused()) {
+                game.resumeGame();
+            } else {
+                game.pauseGame();
+            }
         }
     }
 
