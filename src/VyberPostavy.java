@@ -45,8 +45,12 @@ public class VyberPostavy extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Válečník") || e.getActionCommand().equals("Kouzelník")) {
-            rpgHra.Game();
+        if (e.getActionCommand().equals("Válečník")){
+            //vymyslet to abychsi vybral postavu
         }
+        else if (e.getActionCommand().equals("Kouzelník")) {
+            //vymyslet to abychsi vybral postavu
+        }
+        rpgHra.Game();
     }
 }

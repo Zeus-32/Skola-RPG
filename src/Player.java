@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Player extends Entity {
     KeyHandler keyH;
+    public String Postava;
 
     Player(KeyHandler keyH) {
         this.keyH = keyH;
@@ -16,27 +17,31 @@ public class Player extends Entity {
     public void Defaults() {
         x = 936;
         y = 512;
-        speed = 2;
+        speed = 3;
         direction = "Down";
     }
 
     public void GetPlayerImg() {
-        try {
-            Up1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Up1.png"));
-            Up2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Up2.png"));
-            UpIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/UpIdle.png"));
-            Down1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Down1.png"));
-            Down2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Down2.png"));
-            DownIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/DownIdle.png"));
-            Left1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Left1.png"));
-            Left2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Left2.png"));
-            LeftIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/LeftIdle.png"));
-            Right1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Right1.png"));
-            Right2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Right2.png"));
-            RightIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/RightIdle.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //if (Postava == "valecnik"){
+            try {
+                Up1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Up1.png"));
+                Up2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Up2.png"));
+                UpIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/UpIdle.png"));
+                Down1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Down1.png"));
+                Down2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Down2.png"));
+                DownIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/DownIdle.png"));
+                Left1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Left1.png"));
+                Left2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Left2.png"));
+                LeftIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/LeftIdle.png"));
+                Right1 = ImageIO.read(getClass().getResourceAsStream("/imgs/Right1.png"));
+                Right2 = ImageIO.read(getClass().getResourceAsStream("/imgs/Right2.png"));
+                RightIdle = ImageIO.read(getClass().getResourceAsStream("/imgs/RightIdle.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        //}
+        //else if (Postava == "kouzelnik"){
+        //}
     }
 
     public void update(int panelWidth, int panelHeight, ArrayList<Obstacle> obstacles) {
