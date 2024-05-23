@@ -35,6 +35,7 @@ public class MainMenu extends JPanel implements ActionListener {
         // Nastavení pozic tlačítek
         spustitButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
         odejitButton.setBounds(buttonX, buttonY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
+        
         add(spustitButton);
         add(odejitButton);
     }
