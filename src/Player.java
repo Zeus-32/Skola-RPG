@@ -38,32 +38,28 @@ public class Player extends Entity {
         }
     }
 
-    public void update() {
+    public void update(int panelWidth, int panelHeight) {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-            if (keyH.upPressed) {
+            if (keyH.upPressed && y > 0) {
                 direction = "Up";
                 y -= speed;
             }
-            if (keyH.leftPressed) {
+            if (keyH.leftPressed && x > 0) {
                 direction = "Left";
                 x -= speed;
             }
-            if (keyH.downPressed) {
+            if (keyH.downPressed && y < panelHeight - 48) { // Adjust 48 to your tile size
                 direction = "Down";
                 y += speed;
             }
-            if (keyH.rightPressed) {
+            if (keyH.rightPressed && x < panelWidth - 48) { // Adjust 48 to your tile size
                 direction = "Right";
                 x += speed;
             }
 
             SpriteCouter++;
             if (SpriteCouter > 10) {
-                if (SpriteNum == 1) {
-                    SpriteNum = 2;
-                } else if (SpriteNum == 2) {
-                    SpriteNum = 1;
-                }
+                SpriteNum = (SpriteNum == 1) ? 2 : 1;
                 SpriteCouter = 0;
             }
         }
@@ -73,18 +69,10 @@ public class Player extends Entity {
         BufferedImage image = null;
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             switch (direction) {
-                case "Up":
-                    image = (SpriteNum == 1) ? Up1 : Up2;
-                    break;
-                case "Down":
-                    image = (SpriteNum == 1) ? Down1 : Down2;
-                    break;
-                case "Left":
-                    image = (SpriteNum == 1) ? Left1 : Left2;
-                    break;
-                case "Right":
-                    image = (SpriteNum == 1) ? Right1 : Right2;
-                    break;
+                case "Up" -> image = (SpriteNum == 1) ? Up1 : Up2;
+                case "Down" -> image = (SpriteNum == 1) ? Down1 : Down2;
+                case "Left" -> image = (SpriteNum == 1) ? Left1 : Left2;
+                case "Right" -> image = (SpriteNum == 1) ? Right1 : Right2;
             }
         } else {
             image = switch (direction) {
