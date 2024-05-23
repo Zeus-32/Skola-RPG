@@ -26,8 +26,32 @@ public class Game extends JPanel implements ActionListener {
 
         backgroundImage = new ImageIcon(getClass().getResource("/imgs/background.jpg")).getImage();
 
-        // Přidání překážek do seznamu
-        addObstacle(200, 200, 48, 48, "/imgs/obstacle.png"); // Příklad přidání překážky
+    //přidání stromů jako blok//
+        addObstacle(200, 200, 48, 48, "/imgs/obstacle.png");
+        int j;
+        addObstacle(-10, -32, 100, 100, "/imgs/strom1.png");
+
+        j = 0;
+        for (int i = 0; i < 26; i++){
+            addObstacle(j, -30, 100, 100, "/imgs/strom1.png");
+            j += 75;
+        }
+        j = 0;
+        for (int i = 0; i < 21; i++){
+            addObstacle(-10, j, 100, 100, "/imgs/strom1.png");
+            j += 50;
+        }
+        j = 0;
+        for (int i = 0; i < 21; i++){
+            addObstacle(1830, j, 100, 100, "/imgs/strom1.png");
+            j += 50;
+        }
+        j = 0;
+        for (int i = 0; i < 26; i++){
+            addObstacle(j, 1000, 100, 100, "/imgs/strom1.png");
+            j += 75;
+        }
+    //konec stromů//
     }
 
     private void addObstacle(int x, int y, int width, int height, String imagePath) {
