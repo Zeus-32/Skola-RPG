@@ -16,27 +16,25 @@ public class MainMenu extends JPanel implements ActionListener {
         odejitButton = new JButton("Odejít");
         odejitButton.addActionListener(this);
 
-        setLayout(null); // Absolutní pozicování
+        setLayout(null);
 
-        // Získání velikosti okna
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
 
-        // Výpočet pozice tlačítek pro umístění do středu obrazovky
-        int buttonWidth = 200; // Zmenšíme šířku tlačítek
-        int buttonHeight = 80; // Zmenšíme výšku tlačítek
-        int buttonX = (screenWidth - buttonWidth) / 2;
-        int spustitButtonY = (screenHeight - 3 * buttonHeight) / 2;
-        int odejitButtonY = spustitButtonY + 2 * buttonHeight;
-
-        spustitButton.setBounds(buttonX, spustitButtonY, buttonWidth, buttonHeight);
-        odejitButton.setBounds(buttonX, odejitButtonY, buttonWidth, buttonHeight);
-
-        // Zvětšení textu v tlačítkách
         Font buttonFont = spustitButton.getFont().deriveFont(Font.PLAIN, 24); // Zvětšíme text
         spustitButton.setFont(buttonFont);
         odejitButton.setFont(buttonFont);
+
+        int buttonWidth = 200; // Šířka tlačítek
+        int buttonHeight = 80; // Výška tlačítek
+        int buttonX = (screenWidth - buttonWidth) / 2;
+        int buttonSpacing = 20; // Mezera mezi tlačítky
+        int buttonY = (screenHeight - 2 * buttonHeight - buttonSpacing) / 2; // Pozice prvního tlačítka
+
+        // Nastavení pozic tlačítek
+        spustitButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+        odejitButton.setBounds(buttonX, buttonY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
 
         add(spustitButton);
         add(odejitButton);
