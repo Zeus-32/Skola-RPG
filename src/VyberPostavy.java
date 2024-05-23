@@ -27,6 +27,7 @@ public class VyberPostavy extends JPanel implements ActionListener {
         valecnikButton.setFont(buttonFont);
         kouzelnikButton.setFont(buttonFont);
 
+
         // Výpočet pozice tlačítek pro umístění do středu obrazovky
         int buttonWidth = 200; // Šířka tlačítek
         int buttonHeight = 80; // Výška tlačítek

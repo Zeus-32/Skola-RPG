@@ -12,6 +12,7 @@ public class RPGHra extends JFrame {
         setVisible(true);
     }
 
+
     public void zobrazVyberPostavy() {
         getContentPane().removeAll();
         VyberPostavy vyberPostavy = new VyberPostavy(this);

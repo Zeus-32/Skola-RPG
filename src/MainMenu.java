@@ -7,6 +7,7 @@ public class MainMenu extends JPanel implements ActionListener {
     private JButton spustitButton;
     private JButton odejitButton;
 
+
     public MainMenu(RPGHra rpgHra) {
         this.rpgHra = rpgHra;
 
