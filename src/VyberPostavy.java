@@ -9,10 +9,9 @@ public class VyberPostavy extends JPanel implements ActionListener {
         this.rpgHra = rpgHra; // Uložení instance RPGHra
         setLayout(null); // Absolutní pozicování
 
-        // Získání velikosti okna
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        // Pevně nastavená velikost obrazovky
+        int screenWidth = 1920;  // Šířka obrazovky
+        int screenHeight = 1080; // Výška obrazovky
 
         // Vytvoření tlačítek
         JButton valecnikButton = new JButton("Válečník");
@@ -26,7 +25,6 @@ public class VyberPostavy extends JPanel implements ActionListener {
         Font buttonFont = valecnikButton.getFont().deriveFont(Font.PLAIN, 24); // Zvětšíme text
         valecnikButton.setFont(buttonFont);
         kouzelnikButton.setFont(buttonFont);
-
 
         // Výpočet pozice tlačítek pro umístění do středu obrazovky
         int buttonWidth = 200; // Šířka tlačítek
@@ -46,10 +44,10 @@ public class VyberPostavy extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Válečník")){
-            //vymyslet to abychsi vybral postavu
+            //vymyslet to abych si vybral postavu
         }
         else if (e.getActionCommand().equals("Kouzelník")) {
-            //vymyslet to abychsi vybral postavu
+            //vymyslet to abych si vybral postavu
         }
         rpgHra.Game();
     }

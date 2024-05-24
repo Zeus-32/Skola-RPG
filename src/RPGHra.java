@@ -8,7 +8,7 @@ public class RPGHra extends JFrame {
         getContentPane().add(mainmenu);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(1920, 1080);
         setVisible(true);
     }
 
