@@ -7,7 +7,6 @@ public class MainMenu extends JPanel implements ActionListener {
     private JButton spustitButton;
     private JButton odejitButton;
 
-
     public MainMenu(RPGHra rpgHra) {
         this.rpgHra = rpgHra;
 
@@ -19,9 +18,8 @@ public class MainMenu extends JPanel implements ActionListener {
 
         setLayout(null);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        int screenWidth = 1920;  // Pevně nastavená šířka obrazovky
+        int screenHeight = 1080; // Pevně nastavená výška obrazovky
 
         Font buttonFont = spustitButton.getFont().deriveFont(Font.PLAIN, 24); // Zvětšíme text
         spustitButton.setFont(buttonFont);
