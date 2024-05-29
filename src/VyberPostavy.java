@@ -36,6 +36,7 @@ public class VyberPostavy extends JPanel implements ActionListener {
         add(kouzelnikButton);
     }
 
+
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Válečník")) {
             rpgHra.setSelectedCharacter("valecnik");
