@@ -18,9 +18,9 @@ public class Game extends JPanel implements ActionListener {
     private JButton resumeButton;
     private JButton exitButton;
 
-    public Game() {
-        keyH = new KeyHandler(this); // Pass the game instance to the KeyHandler
-        player = new Player(keyH);
+    public Game(String characterType) {
+        keyH = new KeyHandler(this);
+        player = new Player(keyH, characterType);
         obstacles = new ArrayList<>();
         setLayout(null);
         setFocusable(true);

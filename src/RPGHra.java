@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 public class RPGHra extends JFrame {
+    private String selectedCharacter;
+
     public RPGHra() {
         super("RPG Hra");
 
@@ -12,7 +14,6 @@ public class RPGHra extends JFrame {
         setVisible(true);
     }
 
-
     public void zobrazVyberPostavy() {
         getContentPane().removeAll();
         VyberPostavy vyberPostavy = new VyberPostavy(this);
@@ -21,12 +22,16 @@ public class RPGHra extends JFrame {
         repaint();
     }
 
-    public void Game() {
+    public void startGame() {
         getContentPane().removeAll();
-        Game gamePanel = new Game();
+        Game gamePanel = new Game(selectedCharacter);
         getContentPane().add(gamePanel);
         revalidate();
         repaint();
         gamePanel.requestFocusInWindow();
+    }
+
+    public void setSelectedCharacter(String character) {
+        this.selectedCharacter = character;
     }
 }
