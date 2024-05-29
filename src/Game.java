@@ -13,15 +13,19 @@ public class Game extends JPanel implements ActionListener {
     private final int DELAY = 10;
     private Image backgroundImage;
     private ArrayList<Obstacle> obstacles;
+    private ArrayList<Enemy> enemies;
     private boolean isPaused;
     private JPanel pausePanel;
     private JButton resumeButton;
     private JButton exitButton;
+    private RPGHra rpgHra;
 
-    public Game(String characterType) {
-        keyH = new KeyHandler(this);
-        player = new Player(keyH, characterType);
+    public Game(String selectedCharacter, RPGHra rpgHra) {
+        this.rpgHra = rpgHra;
+        keyH = new KeyHandler(this); // Pass the game instance to the KeyHandler
+        player = new Player(keyH, selectedCharacter);
         obstacles = new ArrayList<>();
+        enemies = new ArrayList<>();
         setLayout(null);
         setFocusable(true);
         addKeyListener(keyH);
@@ -30,7 +34,11 @@ public class Game extends JPanel implements ActionListener {
 
         backgroundImage = new ImageIcon(getClass().getResource("/imgs/background.jpg")).getImage();
 
-        //přidání stromů jako blok//
+        // Přidání nepřátel
+        enemies.add(new Enemy(500, 500, player, rpgHra));
+        enemies.add(new Enemy(1000, 800, player, rpgHra));
+
+        // Přidání stromů jako blok
         int j;
         addObstacle(-10, -32, 100, 100, "/imgs/strom1.png");
 
@@ -54,9 +62,9 @@ public class Game extends JPanel implements ActionListener {
             addObstacle(j, 1000, 100, 100, "/imgs/strom1.png");
             j += 75;
         }
-        //konec stromů//
+        // Konec stromů
 
-        //Pause
+        // Pause
         pausePanel = new JPanel();
         pausePanel.setLayout(new GridBagLayout());
         pausePanel.setBounds(0, 0, 1920, 1080);
@@ -78,7 +86,7 @@ public class Game extends JPanel implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 1;
         pausePanel.add(exitButton, gbc);
-        //konec
+        // Konec pause
     }
 
     public void pauseGame() {
@@ -104,13 +112,21 @@ public class Game extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        obstacles.add(new Obstacle(x, y, width, height, obstacleImage)); // Updated line
+        obstacles.add(new Obstacle(x, y, width, height, obstacleImage));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!isPaused) {
             player.update(getWidth(), getHeight(), obstacles);
+            for (int i = 0; i < enemies.size(); i++) {
+                Enemy enemy = enemies.get(i);
+                enemy.update();
+                if (!enemy.isAlive()) {
+                    enemies.remove(i);
+                    i--;
+                }
+            }
             repaint();
         }
     }
@@ -123,6 +139,9 @@ public class Game extends JPanel implements ActionListener {
         for (Obstacle obstacle : obstacles) {
             obstacle.draw((Graphics2D) g);
         }
+        for (Enemy enemy : enemies) {
+            enemy.draw((Graphics2D) g);
+        }
         Toolkit.getDefaultToolkit().sync();
     }
 
@@ -133,4 +152,16 @@ public class Game extends JPanel implements ActionListener {
     public int getTileSize() {
         return 48;
     }
+
+    public void startFight() {
+        timer.stop();
+        SwingUtilities.invokeLater(() -> {
+            new Fight(player, this);
+        });
+    }
+
+    public void resumeAfterFight() {
+        timer.start();
+    }
+
 }

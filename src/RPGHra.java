@@ -10,7 +10,7 @@ public class RPGHra extends JFrame {
         getContentPane().add(mainmenu);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 1080);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
@@ -24,7 +24,7 @@ public class RPGHra extends JFrame {
 
     public void startGame() {
         getContentPane().removeAll();
-        Game gamePanel = new Game(selectedCharacter);
+        Game gamePanel = new Game(selectedCharacter, this);
         getContentPane().add(gamePanel);
         revalidate();
         repaint();
@@ -33,5 +33,10 @@ public class RPGHra extends JFrame {
 
     public void setSelectedCharacter(String character) {
         this.selectedCharacter = character;
+    }
+
+    public void startFight() {
+        Game gamePanel = (Game) getContentPane().getComponent(0);
+        gamePanel.startFight();
     }
 }
