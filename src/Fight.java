@@ -6,15 +6,17 @@ import java.awt.event.ActionListener;
 public class Fight extends JFrame implements ActionListener {
     private Player player;
     private Game game;
+    private Enemy enemy;
     private int enemyHealth;
     private int playerHealth;
     private JLabel enemyHealthLabel;
     private JLabel playerHealthLabel;
     private JButton attackButton;
 
-    public Fight(Player player, Game game) {
+    public Fight(Player player, Game game, Enemy enemy) {
         this.player = player;
         this.game = game;
+        this.enemy = enemy;
         this.enemyHealth = 100;
         this.playerHealth = 100;
 
@@ -48,11 +50,13 @@ public class Fight extends JFrame implements ActionListener {
 
             if (enemyHealth <= 0) {
                 JOptionPane.showMessageDialog(this, "You won!");
-                dispose();
+                enemy.delete();
+                dispose(); // Close the window
                 game.resumeAfterFight();
             } else if (playerHealth <= 0) {
                 JOptionPane.showMessageDialog(this, "You lost!");
-                System.exit(0); // End the game if the player loses
+                dispose(); // Close the window
+                game.resumeAfterFight();
             }
         }
     }

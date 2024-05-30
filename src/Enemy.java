@@ -12,10 +12,10 @@ public class Enemy extends Entity {
     private int moveCounter;
     private int moveDuration; // Duration for each movement direction
     private int currentDirection;
-    private RPGHra game;
+    private Game game;
     private boolean alive;
 
-    public Enemy(int x, int y, Player player, RPGHra game) {
+    public Enemy(int x, int y, Player player, Game game) {
         this.x = x;
         this.y = y;
         this.player = player;
@@ -94,7 +94,7 @@ public class Enemy extends Entity {
         return alive;
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
+    public void delete() {
+        game.removeEnemy(this);
     }
 }

@@ -19,7 +19,6 @@ public class Game extends JPanel implements ActionListener {
     private JButton resumeButton;
     private JButton exitButton;
     private RPGHra rpgHra;
-    private Enemy currentEnemy;
 
     public Game(String selectedCharacter, RPGHra rpgHra) {
         this.rpgHra = rpgHra;
@@ -36,8 +35,10 @@ public class Game extends JPanel implements ActionListener {
         backgroundImage = new ImageIcon(getClass().getResource("/imgs/background.jpg")).getImage();
 
         // Přidání nepřátel
-        enemies.add(new Enemy(500, 500, player, rpgHra));
-        enemies.add(new Enemy(1000, 800, player, rpgHra));
+        Enemy enemy1 = new Enemy(500, 500, player, this);
+        Enemy enemy2 = new Enemy(1000, 800, player, this);
+        enemies.add(enemy1);
+        enemies.add(enemy2);
 
         // Přidání stromů jako blok
         int j;
@@ -128,8 +129,27 @@ public class Game extends JPanel implements ActionListener {
                     i--;
                 }
             }
+            checkVictory(); // Check for victory condition
             repaint();
         }
+    }
+
+    private void checkVictory() {
+        if (enemies.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Congratulations! You won!");
+            int result = JOptionPane.showConfirmDialog(this, "Do you want to play again?", "Play Again", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                // Restart the game
+                endGame();
+            } else {
+                // Exit the game
+                exitGame();
+            }
+        }
+    }
+
+    private void endGame() {
+        System.exit(0);
     }
 
     @Override
@@ -155,20 +175,17 @@ public class Game extends JPanel implements ActionListener {
     }
 
     public void startFight(Enemy enemy) {
-        if (enemy.isAlive()) {
-            currentEnemy = enemy;
-            timer.stop();
-            SwingUtilities.invokeLater(() -> {
-                new Fight(player, this);
-            });
-        }
+        timer.stop();
+        SwingUtilities.invokeLater(() -> {
+            new Fight(player, this, enemy);
+        });
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
     }
 
     public void resumeAfterFight() {
-        if (currentEnemy != null && !currentEnemy.isAlive()) {
-            enemies.remove(currentEnemy);
-        }
-        currentEnemy = null;
         timer.start();
     }
 }
