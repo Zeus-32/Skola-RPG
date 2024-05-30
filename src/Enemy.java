@@ -61,8 +61,8 @@ public class Enemy extends Entity {
             moveToPlayer();
         }
 
-        if (distanceToPlayer < 50) { // Trigger fight if close to player
-            game.startFight();
+        if (distanceToPlayer < 50 && alive) { // Trigger fight if close to player
+            game.startFight(this);
         }
     }
 
@@ -81,7 +81,9 @@ public class Enemy extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(enemyImage, x, y, 48, 48, null);
+        if (alive) {
+            g2.drawImage(enemyImage, x, y, 48, 48, null);
+        }
     }
 
     public Rectangle getBounds() {

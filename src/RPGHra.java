@@ -35,8 +35,13 @@ public class RPGHra extends JFrame {
         this.selectedCharacter = character;
     }
 
-    public void startFight() {
+    public void startFight(Enemy enemy) {
         Game gamePanel = (Game) getContentPane().getComponent(0);
-        gamePanel.startFight();
+        gamePanel.startFight(enemy);
+    }
+
+    public void resumeAfterFight() {
+        Game gamePanel = (Game) getContentPane().getComponent(0);
+        gamePanel.resumeAfterFight();
     }
 }

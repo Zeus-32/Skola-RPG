@@ -19,6 +19,7 @@ public class Game extends JPanel implements ActionListener {
     private JButton resumeButton;
     private JButton exitButton;
     private RPGHra rpgHra;
+    private Enemy currentEnemy;
 
     public Game(String selectedCharacter, RPGHra rpgHra) {
         this.rpgHra = rpgHra;
@@ -153,15 +154,21 @@ public class Game extends JPanel implements ActionListener {
         return 48;
     }
 
-    public void startFight() {
-        timer.stop();
-        SwingUtilities.invokeLater(() -> {
-            new Fight(player, this);
-        });
+    public void startFight(Enemy enemy) {
+        if (enemy.isAlive()) {
+            currentEnemy = enemy;
+            timer.stop();
+            SwingUtilities.invokeLater(() -> {
+                new Fight(player, this);
+            });
+        }
     }
 
     public void resumeAfterFight() {
+        if (currentEnemy != null && !currentEnemy.isAlive()) {
+            enemies.remove(currentEnemy);
+        }
+        currentEnemy = null;
         timer.start();
     }
-
 }
