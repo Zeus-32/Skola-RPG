@@ -7,13 +7,15 @@ import java.util.Random;
 public class Enemy extends Entity {
     private BufferedImage enemyImage;
     private Player player;
-    private int detectRadius = 200; // Radius within which the enemy detects the player
+    private int detectRadius = 200;
     private Random random;
     private int moveCounter;
-    private int moveDuration; // Duration for each movement direction
+    private int moveDuration;
     private int currentDirection;
     private Game game;
     private boolean alive;
+    private int width = 48;
+    private int height = 48;
 
     public Enemy(int x, int y, Player player, Game game) {
         this.x = x;
@@ -23,9 +25,9 @@ public class Enemy extends Entity {
         this.speed = 2;
         this.random = new Random();
         this.moveCounter = 0;
-        this.moveDuration = 100; // Initial duration for each movement direction
-        this.currentDirection = random.nextInt(4); // Initialize with a random direction
-        this.alive = true; // Enemy is alive when created
+        this.moveDuration = 100;
+        this.currentDirection = random.nextInt(4);
+        this.alive = true;
         loadEnemyImage();
     }
 
@@ -38,22 +40,39 @@ public class Enemy extends Entity {
     }
 
     public void update() {
-        if (!alive) return; // Do nothing if enemy is dead
+        if (!alive) return;
 
         moveCounter++;
         if (moveCounter >= moveDuration) {
             moveCounter = 0;
-            moveDuration = random.nextInt(100) + 100; // Randomize duration between 100 to 200
-            currentDirection = random.nextInt(4); // Change direction after duration
+            moveDuration = random.nextInt(100) + 100;
+            currentDirection = random.nextInt(4);
         }
 
-        // Perform movement based on current direction
+        int newX = x, newY = y;
         switch (currentDirection) {
-            case 0 -> x += speed;
-            case 1 -> x -= speed;
-            case 2 -> y += speed;
-            case 3 -> y -= speed;
+            case 0:
+                newX += speed;
+                break;
+            case 1:
+                newX -= speed;
+                break;
+            case 2:
+                newY += speed;
+                break;
+            case 3:
+                newY -= speed;
+                break;
         }
+
+        Rectangle newBounds = new Rectangle(newX, newY, width, height);
+        for (Obstacle obstacle : game.getObstacles()) {
+            if (newBounds.intersects(obstacle.getBounds())) {
+                return;
+            }
+        }
+        x = newX;
+        y = newY;
 
         double distanceToPlayer = Math.sqrt(Math.pow(player.x - x, 2) + Math.pow(player.y - y, 2));
 
@@ -61,7 +80,7 @@ public class Enemy extends Entity {
             moveToPlayer();
         }
 
-        if (distanceToPlayer < 50 && alive) { // Trigger fight if close to player
+        if (distanceToPlayer < 50 && alive) {
             game.startFight(this);
         }
     }

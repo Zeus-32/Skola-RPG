@@ -107,6 +107,10 @@ public class Game extends JPanel implements ActionListener {
         return isPaused;
     }
 
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
     private void addObstacle(int x, int y, int width, int height, String imagePath) {
         BufferedImage obstacleImage = null;
         try {

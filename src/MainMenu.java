@@ -18,20 +18,19 @@ public class MainMenu extends JPanel implements ActionListener {
 
         setLayout(null);
 
-        int screenWidth = 1920;  // Pevně nastavená šířka obrazovky
-        int screenHeight = 1080; // Pevně nastavená výška obrazovky
+        int screenWidth = 1920;
+        int screenHeight = 1080;
 
-        Font buttonFont = spustitButton.getFont().deriveFont(Font.PLAIN, 24); // Zvětšíme text
+        Font buttonFont = spustitButton.getFont().deriveFont(Font.PLAIN, 24);
         spustitButton.setFont(buttonFont);
         odejitButton.setFont(buttonFont);
 
-        int buttonWidth = 200; // Šířka tlačítek
-        int buttonHeight = 80; // Výška tlačítek
+        int buttonWidth = 200;
+        int buttonHeight = 80;
         int buttonX = (screenWidth - buttonWidth) / 2;
-        int buttonSpacing = 20; // Mezera mezi tlačítky
-        int buttonY = (screenHeight - 2 * buttonHeight - buttonSpacing) / 2; // Pozice prvního tlačítka
+        int buttonSpacing = 20;
+        int buttonY = (screenHeight - 2 * buttonHeight - buttonSpacing) / 2;
 
-        // Nastavení pozic tlačítek
         spustitButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
         odejitButton.setBounds(buttonX, buttonY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
 

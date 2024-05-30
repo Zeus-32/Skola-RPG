@@ -81,7 +81,6 @@ public class Player extends Entity {
             horizontalSpeed = speed;
         }
 
-        // Check for blocked movement
         boolean blockedVertically = false;
         boolean blockedHorizontally = false;
 
@@ -114,7 +113,6 @@ public class Player extends Entity {
             }
         }
 
-        // Apply movement if not blocked
         if (!blockedHorizontally) {
             x += horizontalSpeed;
         } else if (horizontalSpeed != 0 && !keyH.leftPressed && !keyH.rightPressed) {
